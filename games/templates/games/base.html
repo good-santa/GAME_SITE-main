@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Ігровий магазин{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'games/css/style.css' %}">
+  {% block head %}{% endblock %}
+  <!-- Lucide icons (CDN) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/lucide@0.244.0/dist/lucide.iife.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrapper steam-bar">
+      <a href="{% url 'game_list' %}" class="logo" aria-label="На головну">GS</a>
+      <nav class="main-nav">
+        <a href="{% url 'game_list' %}">Каталог</a>
+      </nav>
+      <form action="{% url 'game_list' %}" method="get" class="search-bar" role="search">
+        <input type="text" name="q" value="{{ query }}" placeholder="Пошук ігор..." aria-label="Пошук">
+        <button type="submit" title="Знайти" aria-label="Знайти">
+          <span data-lucide="search" aria-hidden="true"></span>
+        </button>
+      </form>
+      <a class="menu-link cart-link" href="{% url 'cart' %}" title="Кошик">
+        <span data-lucide="shopping-cart" aria-hidden="true"></span>
+        <span class="sr-only">Кошик</span>
+        {% if cart_count and cart_count > 0 %}
+          <span class="cart-badge">{{ cart_count }}</span>
+        {% endif %}
+      </a>
+    </div>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer">
+    <div class="container" style="padding: 20px 0; color: #9fb8cc; text-align: center; border-top: 1px solid rgba(102,192,244,0.2);">
+      © {% now "Y" %} Ігровий магазин. Усі права захищено.
+    </div>
+  </footer>
+  <script src="{% static 'games/js/scripts.js' %}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
+

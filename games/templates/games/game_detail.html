@@ -1,0 +1,68 @@
+{% extends 'games/base.html' %}
+{% load static %}
+
+{% block title %}{{ game.title }}{% endblock %}
+
+{% block content %}
+  <section class="game-detail-section">
+    <div class="container">
+      <a href="{% url 'game_list' %}" class="back">
+        <span data-lucide="arrow-left" aria-hidden="true"></span>
+        <span class="sr-only">Назад до каталогу</span>
+      </a>
+      <div class="game-detail">
+        <div class="gallery">
+          {% if game.cover %}
+            <img src="{{ game.cover.url }}" class="main-img" alt="{{ game.title }}">
+          {% else %}
+            <img src="{% static 'games/img/placeholder_cover.svg' %}" class="main-img" alt="{{ game.title }}">
+          {% endif %}
+          {% if game.screenshot and game.cover and game.screenshot.name != game.cover.name %}
+            <img src="{{ game.screenshot.url }}" class="second-img" alt="Скріншот {{ game.title }}">
+          {% endif %}
+        </div>
+        <div class="details">
+          <h1>{{ game.title }}</h1>
+          <p class="genre">Жанр: {{ game.genre }}</p>
+          <p class="desc">{{ game.description }}</p>
+          <p class="price"><span data-lucide="banknote" aria-hidden="true"></span> {{ game.price }} ₴</p>
+          <form action="{% url 'cart_add' game.pk %}" method="post" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+            {% csrf_token %}
+            <input type="hidden" name="next" value="{% url 'cart' %}">
+            <button class="buy" type="submit" aria-label="Додати гру до кошика">
+              <span data-lucide="shopping-cart" aria-hidden="true"></span>
+              До кошика
+            </button>
+            {% if game.video_url %}
+              <a class="btn btn-secondary" href="{{ game.video_url }}" target="_blank" rel="noopener" aria-label="Відео">
+                <span data-lucide="play" aria-hidden="true"></span>
+                Відео
+              </a>
+            {% else %}
+              <a class="btn btn-secondary" href="https://www.youtube.com/results?search_query={{ game.title|urlencode }}+trailer" target="_blank" rel="noopener" aria-label="Відео">
+                <span data-lucide="play" aria-hidden="true"></span>
+                Відео
+              </a>
+            {% endif %}
+          </form>
+        </div>
+      </div>
+
+      {% if recommended %}
+        <h2>Рекомендуємо</h2>
+        <div class="recommend">
+          {% for rec in recommended %}
+            <a href="{% url 'game_detail' rec.pk %}" class="rec-card">
+              {% if rec.cover %}
+                <img src="{{ rec.cover.url }}" alt="{{ rec.title }}">
+              {% else %}
+                <img src="{% static 'games/img/placeholder_cover.svg' %}" alt="{{ rec.title }}">
+              {% endif %}
+              <p>{{ rec.title }}</p>
+            </a>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </section>
+{% endblock %}

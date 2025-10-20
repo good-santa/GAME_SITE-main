@@ -6,7 +6,7 @@ from .models import Game
 
 @admin.register(Game)
 class GameAdmin(admin.ModelAdmin):
-    list_display = ('title', 'genre', 'platform', 'price')
+    list_display = ('title', 'genre', 'platform', 'price', 'rating')
     list_display_links = ('title',)
     list_filter = ('genre', 'platform')
     search_fields = ('title', 'description')

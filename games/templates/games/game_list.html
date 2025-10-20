@@ -7,88 +7,6 @@
   <div class="container">
     <h1 style="margin: 12px 0 20px;">Каталог</h1>
 
-    <section class="filter-panel">
-      <button class="filter-toggle" type="button" data-filter-toggle aria-expanded="false">
-        Фільтри
-        <span data-lucide="chevron-down" aria-hidden="true"></span>
-      </button>
-      <div class="filter-content" id="filter-content" hidden>
-        <form method="get">
-          <div class="filter-group">
-            <h4>Жанри</h4>
-            <div class="genre-list">
-              {% for g in genres %}
-                <label class="check">
-                  <input type="checkbox" name="genres" value="{{ g }}" {% if selected_genres and g in selected_genres %}checked{% endif %}>
-                  <span>{{ g }}</span>
-                </label>
-              {% endfor %}
-            </div>
-          </div>
-          <div class="filter-actions">
-            <button class="btn" type="submit">Застосувати</button>
-            <a class="btn btn-secondary" href="{% url 'game_list' %}">Скинути</a>
-          </div>
-        </form>
-      </div>
-    </section>
-
-    <div class="product-grid">
-      {% for game in games %}
-        <article class="product-card">
-          <a class="product-cover" href="{% url 'game_detail' game.pk %}">
-            {% if game.cover %}
-              <img src="{{ game.cover.url }}" alt="{{ game.title }}">
-            {% else %}
-              <img src="{% static 'games/img/placeholder_cover.svg' %}" alt="{{ game.title }}">
-            {% endif %}
-          </a>
-          <div class="product-meta">Відеогра</div>
-          <h3 class="product-title">{{ game.title }}</h3>
-          <div class="product-pricing">
-            {% if game.original_price and game.original_price > game.price %}
-              <span class="badge-discount">-{{ game.discount_percent }}%</span>
-              <span class="old-price">{{ game.original_price }} ₴</span>
-              <span class="new-price"><span data-lucide="banknote" aria-hidden="true"></span> {{ game.price }} ₴</span>
-            {% else %}
-              <span class="new-price"><span data-lucide="banknote" aria-hidden="true"></span> {{ game.price }} ₴</span>
-            {% endif %}
-          </div>
-          <form action="{% url 'cart_add' game.pk %}" method="post" style="margin-top:8px;">
-            {% csrf_token %}
-            <input type="hidden" name="next" value="{% url 'cart' %}">
-            <button class="btn" type="submit" aria-label="Додати гру до кошика">
-              <span data-lucide="shopping-cart" aria-hidden="true"></span>
-              <span class="btn-label">До кошика</span>
-            </button>
-          </form>
-          {% if game.video_url %}
-            <a class="btn btn-secondary" style="margin-top:8px; display:inline-block;" href="{{ game.video_url }}" target="_blank" rel="noopener" aria-label="Відео">
-              <span data-lucide="play" aria-hidden="true"></span>
-              <span class="btn-label">Відео</span>
-            </a>
-          {% else %}
-            <a class="btn btn-secondary" style="margin-top:8px; display:inline-block;" href="https://www.youtube.com/results?search_query={{ game.title|urlencode }}+trailer" target="_blank" rel="noopener" aria-label="Відео">
-              <span data-lucide="play" aria-hidden="true"></span>
-              <span class="btn-label">Відео</span>
-            </a>
-          {% endif %}
-        </article>
-      {% empty %}
-        <p class="empty-message">Нічого не знайдено.</p>
-      {% endfor %}
-    </div>
-  </div>
-{% endblock %}
-{% extends 'games/base.html' %}
-{% load static %}
-
-{% block title %}Каталог{% endblock %}
-
-{% block content %}
-  <div class="container">
-    <h1 style="margin: 12px 0 20px;">Каталог</h1>
-
     <div class="chip-filters">
       <a class="chip {% if not active_genre %}active{% endif %}" href="{% url 'game_list' %}">Всі ігри</a>
       {% for g in genres %}
@@ -144,8 +62,9 @@
           {% endif %}
         </article>
       {% empty %}
-        <p class="empty-message">Ігор за запитом не знайдено.</p>
+        <p class="empty-message">Нічого не знайдено.</p>
       {% endfor %}
     </div>
   </div>
 {% endblock %}
+

@@ -4,12 +4,15 @@ from .models import Game
 def game_list(request):
     query = request.GET.get('q', '').strip()
     selected_genres = request.GET.getlist('genres')
+    active_genre = request.GET.get('genre')
 
     games = Game.objects.all()
     if query:
         games = games.filter(title__icontains=query)
 
-    if selected_genres:
+    if active_genre:
+        games = games.filter(genre=active_genre)
+    elif selected_genres:
         games = games.filter(genre__in=selected_genres)
 
     genres = (
@@ -23,6 +26,7 @@ def game_list(request):
         'query': query,
         'genres': genres,
         'selected_genres': selected_genres,
+        'active_genre': active_genre,
     }
 
     return render(request, 'games/game_list.html', context)

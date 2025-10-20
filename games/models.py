@@ -11,6 +11,8 @@ class Game(models.Model):
     cover = models.ImageField(upload_to='images/', blank=True, null=True)
     screenshot = models.ImageField(upload_to='images/', blank=True, null=True)
     video_url = models.URLField(blank=True, null=True)
+    # Simple 0-5 rating that can be shown as stars
+    rating = models.DecimalField(max_digits=3, decimal_places=1, default=0)
 
     def __str__(self):
         return self.title
@@ -23,6 +25,13 @@ class Game(models.Model):
         except Exception:
             return None
         return None
+
+    @property
+    def rating_int(self):
+        try:
+            return int(round(float(self.rating or 0)))
+        except Exception:
+            return 0
 
     class Meta:
         unique_together = (('title', 'platform'),)

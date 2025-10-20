@@ -302,14 +302,14 @@ p {
   width: 100%;
   border-radius: 14px;
   object-fit: cover;
-  max-height: 320px;
+  max-height: 420px;
 }
 
 .second-img {
   width: 100%;
   border-radius: 14px;
   object-fit: cover;
-  max-height: 160px;
+  max-height: 200px;
 }
 
 .details {
@@ -333,7 +333,8 @@ p {
 }
 
 .buy {
-  align-self: flex-start;
+  /* Align with siblings inside flex containers */
+  align-self: center;
   padding: 10px 24px;
   border-radius: 999px;
   background: var(--accent);
@@ -351,8 +352,23 @@ p {
 
 .recommend {
   display: grid;
+  /* original card width */
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 18px;
+  /* Add spacing below the heading */
+  margin-top: 30px;
+}
+
+/* When there is only a single recommended item, make it bigger */
+.recommend.single {
+  grid-template-columns: 1fr;
+  /* Match general spacing under heading */
+  margin-top: 30px;
+}
+
+.recommend.single .rec-card img {
+  /* Increased by another 150px */
+  height: 635px;
 }
 
 .rec-card {
@@ -369,7 +385,8 @@ p {
 
 .rec-card img {
   width: 100%;
-  height: 120px;
+  /* increase image height by +50px */
+  height: 170px;
   object-fit: cover;
 }
 
@@ -524,19 +541,22 @@ p {
   background: #0e141b;
   border: 1px solid rgba(255,255,255,0.06);
   box-shadow: 0 10px 28px rgba(0,0,0,0.5);
+  /* Keep a consistent poster-like proportion across cards */
+  aspect-ratio: 2 / 3;
 }
 
 .product-cover img, .product-cover .no-cover {
   width: 100%;
-  height: 320px;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
 
 /* Safety: normalize any images inside product cards */
+/* Normalize cover images inside product cards */
 .product-card img {
   width: 100% !important;
-  height: 320px !important;
+  height: 100% !important;
   object-fit: cover !important;
   display: block !important;
 }

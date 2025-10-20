@@ -35,15 +35,24 @@ def game_list(request):
 def game_detail(request, pk):
     game = get_object_or_404(Game, pk=pk)
 
-    # Схожі ігри
     recommended = Game.objects.filter(
         genre=game.genre
     ).exclude(id=game.id)[:4]
 
     return render(request, 'games/game_detail.html', {
         'game': game,
-        'recommended': recommended
+        'recommended': recommended,
+        'rating_values': [5, 4, 3, 2, 1],
     })
+
+
+def rate_game(request, pk):
+    game = get_object_or_404(Game, pk=pk)
+    if request.method == 'POST':
+        rating_value = request.POST.get('rating')
+        game.apply_rating(rating_value)
+    return redirect('game_detail', pk=pk)
+
 
 
 # ---------- Cart (session-based) ----------

@@ -257,6 +257,16 @@ p {
   color: #fff;
 }
 
+/* Make action buttons in product cards same size */
+.product-card .btn,
+.product-card .btn.btn-secondary {
+  min-width: 130px;
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .empty-message {
   grid-column: 1 / -1;
   text-align: center;
@@ -572,6 +582,82 @@ p {
 .rating .star { color:#607081; }
 .rating .star.filled { color:#f5c518; }
 .rating .rating-num { color:#9fb8cc; font-size: 12px; margin-left: 2px; }
+.rating .rating-count { color: var(--text-dim); font-size: 12px; margin-left: 4px; }
+
+.rate-form {
+  margin: 8px 0 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.star-rating-input {
+  display: inline-flex;
+  flex-direction: row-reverse;
+  gap: 4px;
+}
+
+.star-rating-input input {
+  display: none;
+}
+
+.star-rating-input label {
+  font-size: 22px;
+  color: #425061;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.star-rating-input label::before {
+  content: '★';
+}
+
+.star-rating-input input:checked ~ label::before,
+.star-rating-input label:hover::before,
+.star-rating-input label:hover ~ label::before {
+  color: #f5c518;
+}
+
+.rate-submit {
+  height: 32px;
+  min-height: 32px;
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+/* Actions row under title */
+.product-card .actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+  align-items: center;
+  justify-content: flex-start;
+}
+.product-card .actions form {
+  margin: 0;
+  display: flex;
+}
+.product-card .actions form .btn {
+  flex: 0 0 auto;
+}
+.product-card .actions a {
+  flex: 0 0 auto;
+}
+
+/* Ensure all buttons in product cards are exactly 44px tall */
+.product-card .btn,
+.product-card .btn.btn-secondary {
+  height: 32px;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  font-size: 14px;
+  border-radius: 18px;
+  min-width: 110px;
+}
 
 .product-cover .no-cover {
   display: flex;

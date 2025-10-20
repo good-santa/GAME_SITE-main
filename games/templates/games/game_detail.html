@@ -24,12 +24,23 @@
         <div class="details">
           <h1>{{ game.title }}</h1>
           <p class="genre">Жанр: {{ game.genre }}</p>
-          <div class="rating" aria-label="Рейтинг {{ game.rating }} з 5" style="margin:6px 0 10px;">
-            {% for i in "12345" %}
+          <div class="rating current-rating" aria-label="Рейтинг {{ game.rating }} з 5" style="margin:6px 0 10px;">
+            {% for _ in "12345" %}
               <span class="star {% if forloop.counter <= game.rating_int %}filled{% endif %}">★</span>
             {% endfor %}
             <span class="rating-num">{{ game.rating|floatformat:1 }}</span>
+            <span class="rating-count">({{ game.rating_votes }} голосів)</span>
           </div>
+          <form class="rate-form" action="{% url 'rate_game' game.pk %}" method="post">
+            {% csrf_token %}
+            <div class="star-rating-input">
+              {% for value in rating_values %}
+                <input type="radio" name="rating" id="rating-{{ value }}" value="{{ value }}" {% if game.rating_int == value %}checked{% endif %}>
+                <label for="rating-{{ value }}" title="{{ value }} з 5"></label>
+              {% endfor %}
+            </div>
+            <button type="submit" class="btn rate-submit">Оцінити</button>
+          </form>
           <p class="desc">{{ game.description }}</p>
           <p class="price"><span data-lucide="banknote" aria-hidden="true"></span> {{ game.price }} ₴</p>
           <form action="{% url 'cart_add' game.pk %}" method="post" style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">

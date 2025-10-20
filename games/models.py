@@ -13,6 +13,7 @@ class Game(models.Model):
     video_url = models.URLField(blank=True, null=True)
     # Simple 0-5 rating that can be shown as stars
     rating = models.DecimalField(max_digits=3, decimal_places=1, default=0)
+    rating_votes = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title
@@ -32,6 +33,19 @@ class Game(models.Model):
             return int(round(float(self.rating or 0)))
         except Exception:
             return 0
+
+    def apply_rating(self, value: int):
+        """Register a new rating (1-5) and update the average."""
+        try:
+            value = int(value)
+        except (TypeError, ValueError):
+            return
+        value = max(1, min(5, value))
+        total = float(self.rating or 0) * int(self.rating_votes or 0)
+        total += value
+        self.rating_votes = int(self.rating_votes or 0) + 1
+        self.rating = round(total / self.rating_votes, 1)
+        self.save(update_fields=['rating', 'rating_votes'])
 
     class Meta:
         unique_together = (('title', 'platform'),)

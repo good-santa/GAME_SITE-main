@@ -6,12 +6,10 @@ class Game(models.Model):
     genre = models.CharField(max_length=50)
     platform = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=8, decimal_places=2)
-    # Початкова (стара) ціна для відображення знижки
     original_price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
     cover = models.ImageField(upload_to='images/', blank=True, null=True)
     screenshot = models.ImageField(upload_to='images/', blank=True, null=True)
     video_url = models.URLField(blank=True, null=True)
-    # Simple 0-5 rating that can be shown as stars
     rating = models.DecimalField(max_digits=3, decimal_places=1, default=0)
     rating_votes = models.PositiveIntegerField(default=0)
 
@@ -35,7 +33,6 @@ class Game(models.Model):
             return 0
 
     def apply_rating(self, value: int):
-        """Register a new rating (1-5) and update the average."""
         try:
             value = int(value)
         except (TypeError, ValueError):

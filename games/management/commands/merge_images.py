@@ -25,13 +25,11 @@ class Command(BaseCommand):
 
         moved = 0
         for g in Game.objects.all():
-            # Cover
             if g.cover and g.cover.name and g.cover.name.startswith('covers/'):
                 src = media / g.cover.name
                 if src.exists():
                     filename = src.name
                     dest = images_dir / filename
-                    # Avoid collisions
                     if dest.exists():
                         stem, ext = os.path.splitext(filename)
                         dest = images_dir / f"{g.id}_{stem}{ext}"
@@ -40,7 +38,6 @@ class Command(BaseCommand):
                         shutil.move(str(src), str(dest))
                         g.cover.name = dest.relative_to(media).as_posix()
                         moved += 1
-            # Screenshot
             if g.screenshot and g.screenshot.name and g.screenshot.name.startswith('screenshots/'):
                 src = media / g.screenshot.name
                 if src.exists():
@@ -61,4 +58,3 @@ class Command(BaseCommand):
             self.stdout.write(self.style.WARNING('Dry-run: no changes saved.'))
         else:
             self.stdout.write(self.style.SUCCESS(f'Moved/updated {moved} file references.'))
-

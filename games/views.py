@@ -82,9 +82,6 @@ def tech(request):
         'active_nav': 'tech',
     })
 
-
-
-# ---------- Cart (session-based) ----------
 def _get_cart(session):
     cart = session.get('cart')
     if not isinstance(cart, dict):
@@ -93,19 +90,16 @@ def _get_cart(session):
 
 
 def cart_add(request, pk):
-    # Add item to cart (increments quantity)
     game = get_object_or_404(Game, pk=pk)
     cart = _get_cart(request.session)
     key = str(game.pk)
     cart[key] = int(cart.get(key, 0)) + 1
     request.session['cart'] = cart
-    # optional message framework could be used here
     next_url = request.POST.get('next') or request.GET.get('next') or 'cart'
     return redirect(next_url)
 
 
 def cart_remove(request, pk):
-    # Remove item completely from cart
     cart = _get_cart(request.session)
     key = str(pk)
     if key in cart:

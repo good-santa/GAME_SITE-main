@@ -38,14 +38,12 @@ class Command(BaseCommand):
         dry = opts['dry_run']
 
         media = Path(settings.MEDIA_ROOT)
-        # Prefer unified images/ if present, fallback to old covers/screenshots
         images_dir = media / 'images'
         covers_dir = media / 'covers'
         screens_dir = media / 'screenshots'
 
         updated = 0
         for g in Game.objects.all():
-            # Cover
             if not g.cover:
                 stem = str(g.pk) if by == 'pk' else slugify(g.title or '')
                 cover_path = None
@@ -59,8 +57,6 @@ class Command(BaseCommand):
                     if not dry:
                         g.cover.name = rel
                         updated += 1
-
-            # Screenshot
             if do_screens and not g.screenshot:
                 stem = str(g.pk) if by == 'pk' else slugify(g.title or '')
                 shot_path = None

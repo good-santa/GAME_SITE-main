@@ -54,7 +54,6 @@ class Command(BaseCommand):
                 except Exception:
                     pass
 
-            # Match game by pk or slugified title
             game = None
             if stem.isdigit():
                 game = Game.objects.filter(pk=int(stem)).first()
@@ -79,4 +78,3 @@ class Command(BaseCommand):
             self.stdout.write(self.style.WARNING('Dry-run: no changes saved.'))
         else:
             self.stdout.write(self.style.SUCCESS(f'Copied {copied} files; updated {updated} covers; skipped {skipped} (already set).'))
-

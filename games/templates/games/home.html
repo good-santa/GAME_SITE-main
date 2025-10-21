@@ -1,0 +1,215 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gaming Club — Головна</title>
+  <link rel="stylesheet" href="{% static 'games/css/home.css' %}">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+</head>
+<body>
+  <header class="modern-header">
+    <div class="header-container">
+      <div class="logo-section">
+        <a href="{% url 'home' %}" class="logo-link" aria-label="Gaming Club">
+          <i data-lucide="gamepad-2" class="logo-icon"></i>
+          <span class="logo-text">Gaming Club</span>
+        </a>
+      </div>
+
+      {% with current=request.resolver_match.url_name %}
+      <nav class="main-nav">
+        <a href="{% url 'home' %}" class="nav-link {% if current == 'home' %}active{% endif %}">Головна</a>
+        <a href="{% url 'community' %}" class="nav-link {% if current == 'community' %}active{% endif %}">Спільнота</a>
+        <a href="{% url 'esports' %}" class="nav-link {% if current == 'esports' %}active{% endif %}">Еспорт</a>
+        <a href="{% url 'tech' %}" class="nav-link {% if current == 'tech' %}active{% endif %}">Техніка</a>
+        <a href="{% url 'game_list' %}" class="nav-link {% if current == 'game_list' %}active{% endif %}">Каталог</a>
+      </nav>
+      {% endwith %}
+    </div>
+  </header>
+
+  <main class="main-content">
+    <section class="welcome-section">
+      <h2>Ласкаво просимо до Gaming Club</h2>
+      <p>
+        Тут ти знайдеш усе про ігри: новини, огляди, залізо, турніри та геймерське комʼюніті.
+        Жодного булшиту — тільки реальний контент для справжніх гравців
+        <span class="inline-icon" data-lucide="gamepad-2" aria-hidden="true"></span>.
+      </p>
+    </section>
+
+    <div class="features-grid" id="features">
+      <div class="feature-card" onclick="scrollToSection('news')">
+        <h3><i data-lucide="newspaper"></i> Новини</h3>
+        <p>Найсвіжіші події з ігрового світу, релізи, апдейти, трейлери.</p>
+      </div>
+
+      <div class="feature-card" onclick="scrollToSection('reviews')">
+        <h3><i data-lucide="file-text"></i> Огляди</h3>
+        <p>Чесні рецензії на нові ігри. Без рекламної хуйні — лише факти.</p>
+      </div>
+
+      <div class="feature-card" onclick="window.location.href='{% url 'tech' %}'">
+        <h3><i data-lucide="cpu"></i> Залізо</h3>
+        <p>Огляд комплектуючих, поради для апгрейду і FPS-тести.</p>
+      </div>
+
+      <div class="feature-card" onclick="window.location.href='{% url 'esports' %}'">
+        <h3><i data-lucide="trophy"></i> Еспорт</h3>
+        <p>Турніри, рейтинги, команди — усе, що рухає кіберспорт в Україні.</p>
+      </div>
+
+      <div class="feature-card" onclick="window.location.href='{% url 'community' %}'">
+        <h3><i data-lucide="users"></i> Спільнота</h3>
+        <p>Наш Discord, форуми та активна тусовка геймерів.</p>
+      </div>
+
+      <div class="feature-card" onclick="scrollToSection('mobile')">
+        <h3><i data-lucide="smartphone"></i> Мобільні ігри</h3>
+        <p>Кращі тайтли для телефону: гайд, рейтинг і рекомендації.</p>
+      </div>
+
+      <div class="feature-card" onclick="window.location.href='{% url 'game_list' %}'">
+        <h3><i data-lucide="library"></i> Каталог ігор</h3>
+        <p>Переглянь повний список тайтлів, знайди знижки та додай у кошик.</p>
+      </div>
+
+      <div class="feature-card" onclick="scrollToSection('podcast')">
+        <h3><i data-lucide="mic"></i> Подкаст</h3>
+        <p>Щотижневі випуски з аналітиками, стримерами та розбором патчів.</p>
+      </div>
+    </div>
+
+    <section id="news" class="content-section">
+      <h2><i data-lucide="newspaper"></i> Останні новини</h2>
+      <div class="news-grid">
+        <div class="news-card">
+          <h3>Cyberpunk 2077: Phantom Liberty</h3>
+          <p>CD Projekt RED викотили апдейт, який реально виправив гру.</p>
+          <span class="news-date"><span class="inline-icon" data-lucide="calendar"></span>21 жовтня 2025</span>
+        </div>
+        <div class="news-card">
+          <h3>PlayStation 5 Pro — скоро</h3>
+          <p>Інсайди про нову консоль, підготовлену для 4K/120Hz геймінгу.</p>
+          <span class="news-date"><span class="inline-icon" data-lucide="calendar"></span>18 жовтня 2025</span>
+        </div>
+        <div class="news-card">
+          <h3>NVIDIA RTX 5090 — перші бенчмарки</h3>
+          <p>Показує вдвічі більше FPS за 4090, але й коштує як чорт.</p>
+          <span class="news-date"><span class="inline-icon" data-lucide="calendar"></span>15 жовтня 2025</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews" class="content-section">
+      <h2><i data-lucide="file-text"></i> Огляди ігор</h2>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <h3>Baldur’s Gate 3</h3>
+          <p>Ідеальна RPG, яку можна дрочити годинами. Оцінка: 9.7/10.</p>
+          <div class="review-rating" aria-label="Оцінка 5 з 5">
+            <span class="inline-icon" data-lucide="star"></span>
+            <span class="inline-icon" data-lucide="star"></span>
+            <span class="inline-icon" data-lucide="star"></span>
+            <span class="inline-icon" data-lucide="star"></span>
+            <span class="inline-icon" data-lucide="star"></span>
+          </div>
+        </div>
+        <div class="review-card">
+          <h3>Spider-Man 2</h3>
+          <p>Новий рівень для PlayStation — сюжет, графіка і кайф.</p>
+          <div class="review-rating" aria-label="Оцінка 5 з 5">
+            <span class="inline-icon" data-lucide="star"></span>
+            <span class="inline-icon" data-lucide="star"></span>
+            <span class="inline-icon" data-lucide="star"></span>
+            <span class="inline-icon" data-lucide="star"></span>
+            <span class="inline-icon" data-lucide="star"></span>
+          </div>
+        </div>
+        <div class="review-card">
+          <h3>Starfield</h3>
+          <p>Амбіційно, але недопиляно. Bethesda як завжди. 7/10.</p>
+          <div class="review-rating" aria-label="Оцінка 4 з 5">
+            <span class="inline-icon" data-lucide="star"></span>
+            <span class="inline-icon" data-lucide="star"></span>
+            <span class="inline-icon" data-lucide="star"></span>
+            <span class="inline-icon" data-lucide="star"></span>
+            <span class="inline-icon muted" data-lucide="star"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="mobile" class="content-section">
+      <h2><i data-lucide="smartphone"></i> Мобільні ігри</h2>
+      <div class="mobile-grid">
+        <div class="mobile-card">
+          <h3>Genshin Impact</h3>
+          <p>Фентезі-шедевр на мобілці. Але гача — зло.</p>
+          <span class="mobile-platform"><span class="inline-icon" data-lucide="smartphone"></span>iOS / Android</span>
+        </div>
+        <div class="mobile-card">
+          <h3>PUBG Mobile</h3>
+          <p>Стара добра класика — все ще топ у своєму жанрі.</p>
+          <span class="mobile-platform"><span class="inline-icon" data-lucide="smartphone"></span>iOS / Android</span>
+        </div>
+        <div class="mobile-card">
+          <h3>Honkai: Star Rail</h3>
+          <p>Космічна RPG з візуалом, що виб’є очі від краси.</p>
+          <span class="mobile-platform"><span class="inline-icon" data-lucide="smartphone"></span>iOS / Android</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="podcast" class="content-section podcast-section">
+      <h2><i data-lucide="mic"></i> Подкаст Gaming Club</h2>
+      <div class="podcast-card">
+        <div class="podcast-info">
+          <h3>Випуск #42: Патчі, патчі й ще раз патчі</h3>
+          <p>Обговорюємо оновлення CS2, нову мету у Dota 2 та чому Starfield все ще потребує модів.</p>
+          <ul class="info-list">
+            <li><span class="inline-icon" data-lucide="clock"></span>Тривалість: 58 хв</li>
+            <li><span class="inline-icon" data-lucide="radio"></span>Ведучі: AlexOnFire, Didi, @couchlord</li>
+          </ul>
+        </div>
+        <button class="btn-ghost" type="button">
+          <span class="inline-icon" data-lucide="play"></span> Слухати на Spotify
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="modern-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Контакти</h3>
+        <p><span class="inline-icon" data-lucide="mail"></span>example@gmail.com</p>
+        <p><span class="inline-icon" data-lucide="phone"></span>+380 (099) 123-45-67</p>
+        <p><span class="inline-icon" data-lucide="map-pin"></span>Львів, Україна</p>
+      </div>
+      <div class="footer-section">
+        <h3>© 2025 Gaming Club</h3>
+        <p>Усі права захищені. Побачимось у черзі на рейтинг.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function scrollToSection(id) {
+      const el = document.getElementById(id)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide && window.lucide.createIcons) {
+        window.lucide.createIcons()
+      }
+    })
+  </script>
+</body>
+</html>
+

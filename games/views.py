@@ -1,6 +1,19 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Game
 
+
+def home(request):
+    return render(request, 'games/home.html', {
+        'active_nav': 'home',
+    })
+
+
+def community(request):
+    return render(request, 'games/community.html', {
+        'active_nav': 'community',
+    })
+
+
 def game_list(request):
     query = request.GET.get('q', '').strip()
     selected_genres = request.GET.getlist('genres')

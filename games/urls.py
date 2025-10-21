@@ -2,7 +2,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.game_list, name='game_list'),
+    path('', views.home, name='home'),
+    path('community/', views.community, name='community'),
+    path('catalog/', views.game_list, name='game_list'),
     path('game/<int:pk>/', views.game_detail, name='game_detail'),
     path('esports/', views.esports, name='esports'),
     path('tech/', views.tech, name='tech'),

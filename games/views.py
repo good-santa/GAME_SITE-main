@@ -27,6 +27,7 @@ def game_list(request):
         'genres': genres,
         'selected_genres': selected_genres,
         'active_genre': active_genre,
+        'active_nav': 'catalog',
     }
 
     return render(request, 'games/game_list.html', context)
@@ -43,6 +44,7 @@ def game_detail(request, pk):
         'game': game,
         'recommended': recommended,
         'rating_values': [5, 4, 3, 2, 1],
+        'active_nav': 'catalog',
     })
 
 
@@ -52,6 +54,18 @@ def rate_game(request, pk):
         rating_value = request.POST.get('rating')
         game.apply_rating(rating_value)
     return redirect('game_detail', pk=pk)
+
+
+def esports(request):
+    return render(request, 'games/esports.html', {
+        'active_nav': 'esports',
+    })
+
+
+def tech(request):
+    return render(request, 'games/tech.html', {
+        'active_nav': 'tech',
+    })
 
 
 
@@ -118,5 +132,6 @@ def cart_view(request):
     context = {
         'items': items,
         'total': total,
+        'active_nav': 'cart',
     }
     return render(request, 'games/cart.html', context)

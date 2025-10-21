@@ -15,7 +15,9 @@
     <div class="container nav-wrapper steam-bar">
       <a href="{% url 'game_list' %}" class="logo" aria-label="На головну">GS</a>
       <nav class="main-nav">
-        <a href="{% url 'game_list' %}">Каталог</a>
+        <a href="{% url 'game_list' %}" class="{% if active_nav == 'catalog' %}active{% endif %}">Каталог</a>
+        <a href="{% url 'esports' %}" class="{% if active_nav == 'esports' %}active{% endif %}">Еспорт</a>
+        <a href="{% url 'tech' %}" class="{% if active_nav == 'tech' %}active{% endif %}">Техніка</a>
       </nav>
       <form action="{% url 'game_list' %}" method="get" class="search-bar" role="search">
         <input type="text" name="q" value="{{ query }}" placeholder="Пошук ігор..." aria-label="Пошук">

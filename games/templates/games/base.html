@@ -6,45 +6,70 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}Gaming Club{% endblock %}</title>
   <link rel="stylesheet" href="{% static 'games/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'games/css/home.css' %}">
   {% block head %}{% endblock %}
-  <!-- Lucide icons (CDN) -->
   <script defer src="https://cdn.jsdelivr.net/npm/lucide@0.244.0/dist/lucide.iife.min.js"></script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container nav-wrapper steam-bar">
-      <a href="{% url 'home' %}" class="logo" aria-label="Gaming Club">GC</a>
+  <header class="modern-header">
+    <div class="header-container">
+      <div class="logo-section">
+        <a href="{% url 'home' %}" class="logo-link" aria-label="Gaming Club">
+          <i data-lucide="gamepad-2" class="logo-icon"></i>
+          <span class="logo-text">Gaming Club</span>
+        </a>
+      </div>
       <nav class="main-nav">
-        <a href="{% url 'home' %}" class="{% if active_nav == 'home' %}active{% endif %}">Головна</a>
-        <a href="{% url 'game_list' %}" class="{% if active_nav == 'catalog' %}active{% endif %}">Каталог</a>
-        <a href="{% url 'community' %}" class="{% if active_nav == 'community' %}active{% endif %}">Спільнота</a>
-        <a href="{% url 'esports' %}" class="{% if active_nav == 'esports' %}active{% endif %}">Еспорт</a>
-        <a href="{% url 'tech' %}" class="{% if active_nav == 'tech' %}active{% endif %}">Техніка</a>
+        <a href="{% url 'home' %}" class="nav-link {% if active_nav == 'home' %}active{% endif %}">Головна</a>
+        <a href="{% url 'community' %}" class="nav-link {% if active_nav == 'community' %}active{% endif %}">Спільнота</a>
+        <a href="{% url 'esports' %}" class="nav-link {% if active_nav == 'esports' %}active{% endif %}">Еспорт</a>
+        <a href="{% url 'tech' %}" class="nav-link {% if active_nav == 'tech' %}active{% endif %}">Техніка</a>
+        <a href="{% url 'game_list' %}" class="nav-link {% if active_nav == 'catalog' %}active{% endif %}">Каталог</a>
       </nav>
-      <form action="{% url 'game_list' %}" method="get" class="search-bar" role="search">
-        <input type="text" name="q" value="{{ query }}" placeholder="Пошук ігор..." aria-label="Пошук">
-        <button type="submit" title="Знайти" aria-label="Знайти">
-          <span data-lucide="search" aria-hidden="true"></span>
-        </button>
-      </form>
-      <a class="menu-link cart-link" href="{% url 'cart' %}" title="Кошик">
-        <span data-lucide="shopping-cart" aria-hidden="true"></span>
-        <span class="sr-only">Кошик</span>
-        {% if cart_count and cart_count > 0 %}
-          <span class="cart-badge">{{ cart_count }}</span>
+      <div class="header-actions">
+        {% if show_search|default:True %}
+        <form action="{% url 'game_list' %}" method="get" class="search-bar" role="search">
+          <input type="text" name="q" value="{{ query }}" placeholder="Пошук ігор..." aria-label="Пошук">
+          <button type="submit" title="Знайти" aria-label="Знайти">
+            <span data-lucide="search" aria-hidden="true"></span>
+          </button>
+        </form>
+        <a class="menu-link cart-link" href="{% url 'cart' %}" title="Кошик">
+          <span data-lucide="shopping-cart" aria-hidden="true"></span>
+          <span class="sr-only">Кошик</span>
+          {% if cart_count and cart_count > 0 %}
+            <span class="cart-badge">{{ cart_count }}</span>
+          {% endif %}
+        </a>
         {% endif %}
-      </a>
+      </div>
     </div>
   </header>
-  <main>
+  <main class="page-main">
     {% block content %}{% endblock %}
   </main>
-  <footer class="site-footer">
-    <div class="container" style="padding: 20px 0; color: #9fb8cc; text-align: center; border-top: 1px solid rgba(102,192,244,0.2);">
-      © {% now "Y" %} Gaming Club. Повний вперед у світ ігор.
+  <footer class="modern-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Контакти</h3>
+        <p><span class="inline-icon" data-lucide="mail"></span>example@gmail.com</p>
+        <p><span class="inline-icon" data-lucide="phone"></span>+380 (099) 123-45-67</p>
+        <p><span class="inline-icon" data-lucide="map-pin"></span>Львів, Україна</p>
+      </div>
+      <div class="footer-section">
+        <h3>© {% now "Y" %} Gaming Club</h3>
+        <p>Побачимось у черзі на рейтинг.</p>
+      </div>
     </div>
   </footer>
   <script src="{% static 'games/js/scripts.js' %}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (window.lucide && window.lucide.createIcons) {
+        window.lucide.createIcons();
+      }
+    });
+  </script>
   {% block scripts %}{% endblock %}
 </body>
 </html>

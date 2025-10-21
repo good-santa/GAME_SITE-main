@@ -1,30 +1,39 @@
-{% extends 'games/base.html' %}
+﻿{% extends 'games/base.html' %}
 
 {% block title %}Кошик{% endblock %}
 
 {% block content %}
-  <div class="container" style="padding: 24px 0 60px;">
-    <h1 style="margin-bottom: 16px;">Кошик</h1>
+  <div class="main-content">
+    <section class="info-hero">
+      <div class="info-hero__inner">
+        <h1><i data-lucide="shopping-bag"></i> Кошик</h1>
+        <p>Тут зберігаються всі ігри, які ти додав. Перевір кількість, очищай або переходь до оформлення замовлення.</p>
+      </div>
+    </section>
 
     {% if items %}
-      <div class="cart-list" style="display: grid; gap: 16px;">
+      <div class="cart-grid">
         {% for row in items %}
-          <article style="display:flex; align-items:center; gap:16px; background: var(--bg-panel); padding: 14px; border-radius: 12px;">
-            <a href="{% url 'game_detail' row.game.pk %}" style="display:block; width: 120px; height: 70px; overflow:hidden; border-radius: 8px; background:#0e141b;">
+          <article class="cart-card">
+            <a class="cart-card__cover" href="{% url 'game_detail' row.game.pk %}">
               {% if row.game.cover %}
-                <img src="{{ row.game.cover.url }}" alt="{{ row.game.title }}" style="width:100%; height:100%; object-fit:cover; display:block;" />
+                <img src="{{ row.game.cover.url }}" alt="{{ row.game.title }}" loading="lazy">
+              {% else %}
+                <span class="cart-card__placeholder" data-lucide="image"></span>
               {% endif %}
             </a>
-            <div style="flex:1 1 auto;">
-              <h3 style="margin-bottom:6px; color:#fff;">{{ row.game.title }}</h3>
-              <div style="color: var(--text-dim)">Кількість: {{ row.qty }}</div>
+            <div class="cart-card__info">
+              <h3>{{ row.game.title }}</h3>
+              <div class="cart-card__meta">
+                <span class="inline-icon" data-lucide="package"></span>
+                Кількість: {{ row.qty }} · {{ row.subtotal }} ₴
+              </div>
             </div>
-            <div style="font-weight: 700; color:#fff; min-width:120px; text-align:right;">{{ row.subtotal }} ₴</div>
-            <form action="{% url 'cart_remove' row.game.pk %}" method="post" style="margin:0 0 0 8px;">
+            <form action="{% url 'cart_remove' row.game.pk %}" method="post" class="cart-card__action">
               {% csrf_token %}
               <input type="hidden" name="next" value="{% url 'cart' %}">
-              <button class="btn btn-secondary" type="submit" aria-label="Видалити з кошика">
-                <span data-lucide="trash-2" aria-hidden="true"></span>
+              <button class="btn btn-secondary" type="submit">
+                <span class="inline-icon" data-lucide="trash-2"></span>
                 Видалити
               </button>
             </form>
@@ -32,27 +41,36 @@
         {% endfor %}
       </div>
 
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-top: 20px;">
-        <a class="btn btn-secondary" href="{% url 'game_list' %}">Повернутися до каталогу</a>
-        <div style="display:flex; align-items:center; gap:12px;">
-          <form action="{% url 'cart_clear' %}" method="post" style="margin:0;">
+      <div class="cart-summary">
+        <div class="cart-summary__total">
+          <span class="inline-icon" data-lucide="wallet"></span>
+          <strong>Разом:</strong> {{ total }} ₴
+        </div>
+        <div class="cart-summary__actions">
+          <form action="{% url 'cart_clear' %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="next" value="{% url 'cart' %}">
-            <button class="btn btn-secondary" type="submit" aria-label="Очистити кошик">
-              <span data-lucide="trash" aria-hidden="true"></span>
+            <button class="btn btn-secondary" type="submit">
+              <span class="inline-icon" data-lucide="trash"></span>
               Очистити
             </button>
           </form>
-          <div style="font-size:18px; font-weight:700; color:#fff;">Разом: {{ total }} ₴</div>
-          <button class="btn" type="button">Оформити</button>
+          <button class="btn" type="button">
+            <span class="inline-icon" data-lucide="credit-card"></span>
+            Оформити
+          </button>
         </div>
       </div>
     {% else %}
-      <p class="empty-message">Кошик порожній.</p>
-      <div style="margin-top: 16px;">
-        <a class="btn" href="{% url 'game_list' %}">Повернутися до каталогу</a>
+      <div class="empty-state">
+        <span class="empty-state__icon" data-lucide="shopping-bag"></span>
+        <h3>Тут поки порожньо</h3>
+        <p>Повернись до каталогу та додай ігри, які хочеш.</p>
+        <a class="btn" href="{% url 'game_list' %}">
+          <span class="inline-icon" data-lucide="library"></span>
+          До каталогу
+        </a>
       </div>
     {% endif %}
   </div>
 {% endblock %}
-

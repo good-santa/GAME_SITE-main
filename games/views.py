@@ -5,6 +5,8 @@ from .models import Game
 def home(request):
     return render(request, 'games/home.html', {
         'active_nav': 'home',
+        'show_search': False,
+        'query': '',
     })
 
 

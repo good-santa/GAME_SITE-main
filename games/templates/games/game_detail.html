@@ -4,6 +4,7 @@
 {% block title %}{{ game.title }}{% endblock %}
 
 {% block content %}
+  <div class="main-content">
   <section class="game-detail-section">
     <div class="container">
       <a href="{% url 'game_list' %}" class="back">
@@ -82,4 +83,5 @@
       {% endif %}
     </div>
   </section>
+  </div>
 {% endblock %}

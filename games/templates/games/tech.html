@@ -3,93 +3,96 @@
 {% block title %}Техніка - Gaming Club{% endblock %}
 
 {% block content %}
-  <section class="info-hero">
-    <div class="container info-hero__inner">
-      <h1><i data-lucide="cpu"></i> Ігрове залізо</h1>
-      <p>Огляди, поради та бенчмарки для справжніх геймерів. Підбери оптимальну збірку, дізнайся FPS у своїх улюблених іграх.</p>
-    </div>
-  </section>
+  <div class="main-content">
+    <section class="info-hero">
+      <div class="info-hero__inner">
+        <h1><i data-lucide="cpu"></i> Ігрове залізо</h1>
+        <p>Огляди, поради та бенчмарки для справжніх геймерів. Підбери оптимальну збірку, дізнайся FPS у своїх улюблених іграх.</p>
+      </div>
+    </section>
 
-  <section class="info-grid-section">
-    <div class="container info-grid">
-      <article class="info-card">
-        <h3><i data-lucide="monitor"></i> Монітори</h3>
-        <p>ТОП-5 моніторів для геймінгу у 2025. Від 144 Гц до 4K з низькою затримкою.</p>
-      </article>
-      <article class="info-card">
-        <h3><i data-lucide="cpu"></i> Процесори</h3>
-        <p>AMD Ryzen 7 7800X3D vs Intel i7-14700K — хто кращий для ігор?</p>
-      </article>
-      <article class="info-card">
-        <h3><i data-lucide="hard-drive"></i> Відеокарти</h3>
-        <p>Radeon RX 7900 XTX, RTX 4080 Super — порівняння у реальних іграх.</p>
-      </article>
-      <article class="info-card">
-        <h3><i data-lucide="mouse-pointer-2"></i> Периферія</h3>
-        <p>Мишки, клавіатури, гарнітури — усе для максимальної продуктивності.</p>
-      </article>
-      <article class="info-card">
-        <h3><i data-lucide="gauge"></i> Системи охолодження</h3>
-        <p>Порівняння AIO та повітряних кулерів із тестами температур Ryzen та Core.</p>
-      </article>
-      <article class="info-card">
-        <h3><i data-lucide="memory-stick"></i> Оперативна пам'ять</h3>
-        <p>DDR4 vs DDR5: які таймінги та частоти дають кращий FPS у сучасних іграх.</p>
-      </article>
-      <article class="info-card">
-        <h3><i data-lucide="server"></i> Накопичувачі</h3>
-        <p>NVMe Gen4 проти Gen5 — тести завантаження, температура та ресурс пам'яті.</p>
-      </article>
-      <article class="info-card">
-        <h3><i data-lucide="settings"></i> Оптимізація Windows</h3>
-        <p>Налаштування живлення, Game Mode і драйверів для стабільного FPS.</p>
-      </article>
-    </div>
-  </section>
+    <section class="info-grid-section">
+      <div class="info-grid info-grid--wide">
+        <article class="info-card">
+          <h3><i data-lucide="monitor"></i> Монітори</h3>
+          <p>ТОП-5 моделей 2025 року: від 144 Гц до 4K з мінімальною затримкою.</p>
+        </article>
+        <article class="info-card">
+          <h3><i data-lucide="cpu"></i> Процесори</h3>
+          <p>AMD Ryzen 7 7800X3D vs Intel i7-14700K — хто кращий для ігор.</p>
+        </article>
+        <article class="info-card">
+          <h3><i data-lucide="hard-drive"></i> Відеокарти</h3>
+          <p>Radeon RX 7900 XTX, RTX 4080 SUPER — порівняння у реальних проектах.</p>
+        </article>
+        <article class="info-card">
+          <h3><i data-lucide="mouse-pointer-2"></i> Периферія</h3>
+          <p>Мишки, клавіатури, гарнітури — усе для максимальної продуктивності.</p>
+        </article>
+        <article class="info-card">
+          <h3><i data-lucide="gauge"></i> Охолодження</h3>
+          <p>Порівняння AIO та повітряних кулерів із тестами температур Ryzen та Core.</p>
+        </article>
+        <article class="info-card">
+          <h3><i data-lucide="memory-stick"></i> Оперативна памʼять</h3>
+          <p>DDR4 проти DDR5: таймінги, частоти та реальний вплив на FPS.</p>
+        </article>
+        <article class="info-card">
+          <h3><i data-lucide="server"></i> Накопичувачі</h3>
+          <p>NVMe Gen4 vs Gen5 — тести завантаження, температура та ресурс памʼяті.</p>
+        </article>
+        <article class="info-card">
+          <h3><i data-lucide="settings"></i> Оптимізація Windows</h3>
+          <p>Налаштування живлення, Game Mode та драйверів для стабільного FPS.</p>
+        </article>
+      </div>
+    </section>
 
-  <section class="info-grid-section">
-    <div class="container info-grid info-grid--wide">
-      <article class="info-card info-card--wide">
-        <h3><i data-lucide="cpu"></i> Рекомендовані збірки</h3>
-        <table class="spec-table">
-          <thead>
-            <tr>
-              <th>Ціль</th>
-              <th>CPU</th>
-              <th>GPU</th>
-              <th>FPS (Full HD)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Бюджет</td>
-              <td>Ryzen 5 7600</td>
-              <td>RTX 4060</td>
-              <td>120+</td>
-            </tr>
-            <tr>
-              <td>Баланс</td>
-              <td>Core i7-14700F</td>
-              <td>RTX 4070 SUPER</td>
-              <td>165+</td>
-            </tr>
-            <tr>
-              <td>Преміум</td>
-              <td>Ryzen 9 7950X3D</td>
-              <td>RTX 4090</td>
-              <td>200+</td>
-            </tr>
-          </tbody>
-        </table>
-      </article>
-      <article class="info-card">
-        <h3><i data-lucide="battery"></i> Живлення</h3>
-        <p>Підбір блока живлення по ефективності 80+ Gold/Platinum та запасу потужності.</p>
-      </article>
-      <article class="info-card">
-        <h3><i data-lucide="download"></i> Драйвери та софт</h3>
-        <p>Посилання на останні версії BIOS, GPU-драйверів та утиліт для моніторингу.</p>
-      </article>
-    </div>
-  </section>
+    <section class="info-grid-section">
+      <div class="info-grid info-grid--wide">
+        <article class="info-card info-card--wide">
+          <h3><i data-lucide="cpu"></i> Рекомендовані збірки</h3>
+          <table class="spec-table">
+            <thead>
+              <tr>
+                <th>Ціль</th>
+                <th>CPU</th>
+                <th>GPU</th>
+                <th>FPS (1080p)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Бюджет</td>
+                <td>Ryzen 5 7600</td>
+                <td>RTX 4060</td>
+                <td>120+</td>
+              </tr>
+              <tr>
+                <td>Баланс</td>
+                <td>Core i7-14700F</td>
+                <td>RTX 4070 SUPER</td>
+                <td>165+</td>
+              </tr>
+              <tr>
+                <td>Преміум</td>
+                <td>Ryzen 9 7950X3D</td>
+                <td>RTX 4090</td>
+                <td>200+</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+        <article class="info-card">
+          <h3><i data-lucide="battery"></i> Живлення</h3>
+          <p>Підбираємо блок живлення із запасом потужності та сертифікацією 80+ Gold/Platinum.</p>
+        </article>
+        <article class="info-card">
+          <h3><i data-lucide="download"></i> Драйвери та софт</h3>
+          <p>Посилання на свіжі BIOS, графічні драйвери й утиліти для моніторингу.</p>
+        </article>
+      </div>
+    </section>
+  </div>
 {% endblock %}
+

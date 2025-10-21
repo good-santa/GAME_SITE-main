@@ -4,7 +4,7 @@
 {% block title %}Каталог{% endblock %}
 
 {% block content %}
-  <div class="container">
+  <div class="main-content catalog-page">
     <h1 style="margin: 12px 0 20px;">Каталог</h1>
 
     <div class="chip-filters">
@@ -31,7 +31,7 @@
               <span class="star {% if forloop.counter <= game.rating_int %}filled{% endif %}">★</span>
             {% endfor %}
             <span class="rating-num">{{ game.rating|floatformat:1 }}</span>
-            <span class="rating-count">({{ game.rating_votes }} голосів)</span>
+            <span class="rating-count">({{ game.rating_votes }} votes)</span>
           </div>
           <div class="product-pricing">
             {% if game.original_price and game.original_price > game.price %}

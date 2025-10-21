@@ -1,36 +1,9 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gaming Club — Головна</title>
-  <link rel="stylesheet" href="{% static 'games/css/home.css' %}">
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
-</head>
-<body>
-  <header class="modern-header">
-    <div class="header-container">
-      <div class="logo-section">
-        <a href="{% url 'home' %}" class="logo-link" aria-label="Gaming Club">
-          <i data-lucide="gamepad-2" class="logo-icon"></i>
-          <span class="logo-text">Gaming Club</span>
-        </a>
-      </div>
+{% extends 'games/base.html' %}
 
-      {% with current=request.resolver_match.url_name %}
-      <nav class="main-nav">
-        <a href="{% url 'home' %}" class="nav-link {% if current == 'home' %}active{% endif %}">Головна</a>
-        <a href="{% url 'community' %}" class="nav-link {% if current == 'community' %}active{% endif %}">Спільнота</a>
-        <a href="{% url 'esports' %}" class="nav-link {% if current == 'esports' %}active{% endif %}">Еспорт</a>
-        <a href="{% url 'tech' %}" class="nav-link {% if current == 'tech' %}active{% endif %}">Техніка</a>
-        <a href="{% url 'game_list' %}" class="nav-link {% if current == 'game_list' %}active{% endif %}">Каталог</a>
-      </nav>
-      {% endwith %}
-    </div>
-  </header>
+{% block title %}Gaming Club — Головна{% endblock %}
 
-  <main class="main-content">
+{% block content %}
+  <div class="main-content">
     <section class="welcome-section">
       <h2>Ласкаво просимо до Gaming Club</h2>
       <p>
@@ -179,23 +152,10 @@
         </button>
       </div>
     </section>
-  </main>
+  </div>
+{% endblock %}
 
-  <footer class="modern-footer">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3>Контакти</h3>
-        <p><span class="inline-icon" data-lucide="mail"></span>example@gmail.com</p>
-        <p><span class="inline-icon" data-lucide="phone"></span>+380 (099) 123-45-67</p>
-        <p><span class="inline-icon" data-lucide="map-pin"></span>Львів, Україна</p>
-      </div>
-      <div class="footer-section">
-        <h3>© 2025 Gaming Club</h3>
-        <p>Усі права захищені. Побачимось у черзі на рейтинг.</p>
-      </div>
-    </div>
-  </footer>
-
+{% block scripts %}
   <script>
     function scrollToSection(id) {
       const el = document.getElementById(id)
@@ -203,13 +163,5 @@
         el.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
     }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      if (window.lucide && window.lucide.createIcons) {
-        window.lucide.createIcons()
-      }
-    })
   </script>
-</body>
-</html>
-
+{% endblock %}
